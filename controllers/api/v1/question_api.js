@@ -16,12 +16,36 @@ module.exports.create = async function(req,res){
         let questions = await Question.create({
             id:req.body.id,
             title:req.body.title,
-            options:req.body._id
         });
+
+        return res.status(200).json({
+            data:{
+                questions:questions
+            },
+            message:"Question Published",
+        }); 
     }catch(err){
         console.log('*****',err);
         return res.status(500).json({
             message:"Create:Internal Server Error"
+        });
+    }
+}
+
+module.exports.destroy = async function(req,res){
+    try{
+        let question = await Question.findById(req.params.id);
+
+        question.remove();
+        await Option.deleteMany({question:req.params.id});
+
+        return res.status(200).json({
+            message:'Question and associated options deleted successfully'
+        });
+    }catch(err){
+        console.log('*****',err);
+        return res.status(500).json({
+            message:"Delete:Internal Server Error"
         });
     }
 }
