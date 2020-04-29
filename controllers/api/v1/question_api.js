@@ -14,7 +14,6 @@ module.exports.index = async function(req,res){
 module.exports.create = async function(req,res){
     try{
         let questions = await Question.create({
-            id:req.body.id,
             title:req.body.title,
         });
 
@@ -27,7 +26,7 @@ module.exports.create = async function(req,res){
     }catch(err){
         console.log('*****',err);
         return res.status(500).json({
-            message:"Create:Internal Server Error"
+            message:"Create Question:Internal Server Error"
         });
     }
 }
@@ -45,7 +44,7 @@ module.exports.destroy = async function(req,res){
     }catch(err){
         console.log('*****',err);
         return res.status(500).json({
-            message:"Delete:Internal Server Error"
+            message:"Delete Question:Internal Server Error"
         });
     }
 }

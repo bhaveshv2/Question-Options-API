@@ -1,9 +1,6 @@
 const mongoose=require('mongoose');
 
 const optionSchema = new mongoose.Schema({
-    id:{
-        type:Number
-    },
     text:{
         type:String,
         required:true,
