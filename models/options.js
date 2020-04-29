@@ -1,5 +1,6 @@
 const mongoose=require('mongoose');
 
+//Option Schema
 const optionSchema = new mongoose.Schema({
     text:{
         type:String,
@@ -10,6 +11,7 @@ const optionSchema = new mongoose.Schema({
         required:true,
     },
 
+    //getting the reference of Question schema
     question:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Question'

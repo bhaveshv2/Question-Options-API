@@ -1,5 +1,5 @@
-//after getting here, it routes to the product route
 
+//after getting here, it routes to the product route
 const express = require('express');
 const router = express.Router();
 

@@ -1,6 +1,9 @@
+//Importing the databases
 const Question = require('../../../models/questions');
 const Option = require('../../../models/options');
 
+
+//Function for creating the options
 module.exports.create = async function(req,res){
     try{
         let question = await Question.findById(req.body.question);
@@ -29,7 +32,7 @@ module.exports.create = async function(req,res){
     }
 }
 
-
+//Function for deleting the option
 module.exports.destroy = async function(req,res){
     try{
         let option = await Option.findById(req.params.id);
@@ -53,3 +56,18 @@ module.exports.destroy = async function(req,res){
     }
 }
 
+//function to addition in vote Dynamically
+module.exports.addVote = async function (req, res) {
+    try {
+        await Option.findByIdAndUpdate({ _id: req.params.id }, { $inc: { votes: 1 } });
+
+        return res.status(200).json({
+            message: 'Vote added succesfully'
+        });
+    } catch (err) {
+        console.log('***', err);
+        return res.status(500).json({
+            message: "Add Vote:Internal Server Error"
+        });
+    }
+}
